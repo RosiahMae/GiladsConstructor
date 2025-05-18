@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GIL ADS Contractor - Advertising & Printing Shop</title>
+<link rel="icon" href="logo.png" type="image/png" />
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+<style>
+  /* Reset and base */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  body {
+    background-color: #fefefe;
+    color: #404042;
+    line-height: 1.6;
+  }
+  a {
+    color: #cb2429;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Navbar */
+  nav {
+    background: #404042;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  nav .container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+  }
+  nav .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #cb2429;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  nav ul li {
+    font-weight: 600;
+  }
+  nav ul li a {
+    color: white;
+    transition: color 0.3s ease;
+  }
+  nav ul li a:hover {
+    color: #cb2429;
+  }
+  /* Hamburger for mobile */
+  nav .menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  nav .menu-toggle div {
+    background: white;
+    height: 3px;
+    width: 25px;
+    margin: 4px 0;
+  }
+
+  /* Hero */
+  header {
+    position: relative;
+    height: 80vh;
+    background: url('bg image.png') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 36, 36, 0.6);
+    z-index: 1;
+  }
+  header .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+  header .hero-content img.logo {
+    max-width: 150px;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  header p {
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+  }
+
+  /* Section styles */
+  section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+  }
+  section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #a93d3f;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+  .glass-card {
+    background: rgba(255 255 255 / 0.85);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(203, 36, 41, 0.3);
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* About Section */
+  #about .glass-card p {
+    font-size: 1.1rem;
+    color: #404042;
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+
+  /* Contact Info */
+  #contact-info {
+    margin-top: 2rem;
+    font-weight: 600;
+    color: #404042;
+    text-align: center;
+  }
+  #contact-info span {
+    display: block;
+    margin: 0.2rem 0;
+  }
+
+  /* Services & Products Grid */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2rem;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgb(203 36 41 / 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgb(203 36 41 / 0.4);
+  }
+  .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .card h3 {
+    color: #a93d3f;
+    font-weight: 700;
+    margin: 1rem;
+  }
+  .card p {
+    margin: 0 1rem 1rem;
+    font-weight: 600;
+    color: #404042;
+  }
+
+  /* Owner Info */
+  #owner {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: #cca3a3;
+    border-radius: 12px;
+    padding: 1.8rem 2rem;
+    color: #404042;
+    box-shadow: 0 5px 15px rgba(171, 61, 63, 0.4);
+  }
+  #owner h3 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: #cb2429;
+    text-align: center;
+  }
+  #owner p {
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* Floating Back to Top Button */
+  #topBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #cb2429;
+    border: none;
+    border-radius: 50%;
+    padding: 12px 16px;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(203,36,41,0.7);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 10000;
+  }
+  #topBtn:hover {
+    opacity: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    header h1 {
+      font-size: 2.2rem;
+    }
+    header p {
+      font-size: 1rem;
+    }
+    nav ul {
+      display: none;
+      flex-direction: column;
+      background: #404042;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 200px;
+      border-radius: 0 0 0 12px;
+    }
+    nav ul.active {
+      display: flex;
+    }
+    nav .menu-toggle {
+      display: flex;
+    }
+    
+  }
+   /* Facebook button */
+  .fb-button {
+    display: inline-flex;
+    align-items: center;
+    background: #1877f2;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .fb-button:hover {
+    background: #145dbf;
+  }
+  .fb-icon {
+    margin-right: 10px;
+    fill: white;
+    width: 20px;
+    height: 20px;
+  }
+  /* Responsive */
+  @media(max-width: 900px) {
+    .card {
+      flex: 1 1 calc(50% - 20px);
+    }
+  }
+  @media(max-width: 600px) {
+    .card {
+      flex: 1 1 100%;
+    }
+}
+</style>
+<link rel="icon" href="logo.png" />
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">GIL ADS CONTRACTOR</div>
+    <div class="menu-toggle" id="menu-toggle">
+      <div></div><div></div><div></div>
+    </div>
+    <ul id="nav-menu">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#owner">Owner</a></li>
+      <li><a href="#contact-info">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <div class="hero-content" data-aos="fade-up">
+    <img src="logo.png" alt="GIL ADS Contractor Logo" class="logo" />
+    <h1>Gil Ads Contractor</h1>
+    <p>Good-Quality Advertising Signs Since 2000</p>
+  </div>
+</header>
+
+<main>
+
+  <section id="about" data-aos="fade-right">
+    <h2>♥♥♥♥♥♥ About the Company ♥♥♥♥♥♥♥</h2>
+    <div class="glass-card">
+      <p>
+        GIL ADS CONTRACTOR, a genuine outgrowth of 3M Philippines’ official contractor: (Modagraphics Corporation and Omega Advertising Incorporated).
+        The owner who worked as the General Manager is continually increasing his manual and technological skills through Graphic Expo Seminars and Annual Product Trainings. He endows his decade of service manufacturing numerous Advertising Projects starting from small acrylic plastic molding, to module fabrication and then fully developed into an over-all boutique construction.
+
+        GIL ADS administers its marketing and production office in Quezon City. The company is equipped with fabrication facilities and complete delivery services for your construction and manufacturing needs. We are handling three (3) shifts of manpower resources who are physically trained to offer you 24 hours quality service.
+
+        Our Company offers both local and provincial project constructions. Behind our proud technological skills are humble officers who can attend to your inquiries daily.
+      </p>
+    </div>
+  </section>
+
+  <section id="services" data-aos="fade-left">
+    <h2>Our Services</h2>
+    <div class="grid-container">
+      <div class="card" data-aos="zoom-in">
+        <img src="production.png" alt="Production Area" />
+        <h3>Production Area</h3>
+        <p>State-of-the-art manufacturing and fabrication facilities to ensure quality and efficiency.</p>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="100">
+        <img src="printing.png" alt="Printing Area" />
+        <h3>Printing Area</h3>
+        <p>High-quality printing services with advanced equipment for crisp, vibrant output.</p>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="200">
+        <img src="laser.png" alt="Laser Cutting Area" />
+        <h3>Laser Cutting Area</h3>
+        <p>Precision laser cutting technology for custom designs and perfect finishes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" data-aos="fade-right">
+    <h2>Our Products</h2>
+    <div class="grid-container">
+      <div class="card" data-aos="flip-left">
+        <img src="signage.png" alt="Signages" />
+        <h3>SIGNAGES</h3>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="100">
+        <img src="arc.png" alt="Acrylic Plastic Built Up with LED Light" />
+        <h3>Acrylic Plastic Built Up with LED Light</h3>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="200">
+        <img src="stainless fetch].png" alt="Stainless Etching" />
+        <h3>STAINLESS ETCHING</h3>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="300">
+        <img src="pana.png" alt="Panaflex" />
+        <h3>Panaflex</h3>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="400">
+        <img src="island.png" alt="Island Modules" />
+        <h3>ISLAND MODULES</h3>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="500">
+        <img src="menu.png" alt="Menu Board" />
+        <h3>MENU BOARD</h3>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="600">
+        <img src="conopy.png" alt="Canopy Stand & Steel" />
+        <h3>CANOPY STAND & STEEL</h3>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="700">
+        <img src="booth.png" alt="Booth Stand" />
+        <h3>BOOTH STAND</h3>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="800">
+        <img src="stick.png" alt="Sticker Installation" />
+        <h3>STICKER INSTALLATION</h3>
+      </div>
+    </div>
+  </section>
+
+  <section id="owner" data-aos="fade-up">
+    <h2>Owner Information</h2>
+    <div id="owner">
+      <h3>Gil Bereber</h3>
+      <p><strong>Contact:</strong> 09260679851</p>
+      <p><strong>Address:</strong> 553 Riverside West Los Angeles St., California Village, San Bartolome, Quezon City, Philippines, 1116</p>
+    </div>
+  </section>
+
+  <section id="contact-info" data-aos="fade-up">
+    <h2>Contact Us</h2>
+    <div class="glass-card" style="text-align:center;">
+      <p>For More Inquiries Please Feel Free to Call Us At:</p>
+      <p><strong>GIL ADS CONTRACTOR</strong></p>
+      <p>Tel Nos.: 70920233</p>
+      <p>Cell Nos.: 09238289085 | 09260679851</p>
+      <p>Or e-mail us at: <a href="mailto:gil_ads16@yahoo.com">gil_ads16@yahoo.com</a></p>
+
+      <a href="https://www.facebook.com/giladscontractor/" target="_blank" rel="noopener" class="fb-button" aria-label="Visit Gil Ads Contractor Facebook Page">
+      <svg class="fb-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.326v21.348C0 23.406.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.098 2.795.142v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.324-.594 1.324-1.326V1.326C24 .593 23.406 0 22.675 0z"/></svg>
+      Facebook
+    </a>
+      <p>We are open from Monday to Saturday, 8:00 AM to 5:00 PM</p>
+    </div>
+  </section>
+
+</main>
+
+<button id="topBtn" title="Back to top">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+
+  // Back to top button
+  const topBtn = document.getElementById('topBtn');
+  window.onscroll = function() {
+    if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  };
+  topBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
