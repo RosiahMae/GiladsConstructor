@@ -469,6 +469,73 @@
       min-height: 22px;
     }
 
+    /* Register Modal Styles */
+    #registerModal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(34,34,59,0.45);
+      justify-content: center;
+      align-items: center;
+    }
+    #registerModal.active {
+      display: flex;
+    }
+    .register-modal {
+      background: #fff;
+      padding: 32px 28px 24px 28px;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(34,34,59,0.18);
+      min-width: 320px;
+      max-width: 90vw;
+      text-align: center;
+      position: relative;
+    }
+    .register-modal h3 {
+      color: var(--secondary);
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .register-modal input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 14px;
+      border: 1px solid #bfc0c0;
+      border-radius: 6px;
+      background: #f8f9fa;
+      font-size: 1rem;
+    }
+    .register-modal button {
+      background: var(--secondary);
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 6px;
+      transition: background 0.2s;
+    }
+    .register-modal button:hover {
+      background: var(--primary);
+    }
+    .register-modal .close-btn {
+      position: absolute;
+      top: 12px; right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: var(--accent);
+      cursor: pointer;
+    }
+    .register-modal .error-msg {
+      color: #b00020;
+      font-size: 0.98rem;
+      margin-bottom: 8px;
+      min-height: 22px;
+    }
+
     /* Responsive */
     @media (max-width: 1200px) {
       section, #inquiry-form {
@@ -700,6 +767,25 @@
     <input type="text" id="loginUser" placeholder="Username" autocomplete="username" />
     <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password" />
     <button onclick="login()">Login</button>
+    <p style="margin-top:10px; font-size:0.97rem;">
+      Don't have an account? <a href="#" onclick="switchToRegister(event)">Register</a>
+    </p>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div id="registerModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:2000; align-items:center; justify-content:center;">
+  <div class="login-modal">
+    <button class="close-btn" onclick="closeRegisterModal()">&times;</button>
+    <h3>Create Account</h3>
+    <div class="error-msg" id="registerError"></div>
+    <input type="text" id="registerUser" placeholder="Username" autocomplete="username" />
+    <input type="password" id="registerPass" placeholder="Password" autocomplete="new-password" />
+    <input type="password" id="registerPass2" placeholder="Confirm Password" autocomplete="new-password" />
+    <button onclick="registerAccount()">Register</button>
+    <p style="margin-top:10px; font-size:0.97rem;">
+      Already have an account? <a href="#" onclick="switchToLogin(event)">Login</a>
+    </p>
   </div>
 </div>
 
@@ -759,7 +845,8 @@
   function login() {
     const user = document.getElementById('loginUser').value.trim();
     const pass = document.getElementById('loginPass').value.trim();
-    if (user && pass) {
+    let users = JSON.parse(localStorage.getItem('gilads_accounts') || '{}');
+    if (user && pass && users[user] && users[user] === pass) {
       localStorage.setItem('gilads_user', user);
       localStorage.setItem('gilads_pass', pass);
       closeLoginModal();
@@ -768,7 +855,7 @@
       updateProfileUI();
       showLoginNotif(user);
     } else {
-      document.getElementById('loginError').textContent = 'Please enter username and password.';
+      document.getElementById('loginError').textContent = 'Invalid username or password.';
     }
   }
   // Allow Enter key to submit login
@@ -804,6 +891,57 @@
     formMsg.textContent = '✅ Thank you! We have received your inquiry.';
     formMsg.style.color = 'green';
     document.getElementById('contactForm').reset();
+  }
+
+  // --- REGISTER LOGIC ---
+  function showRegisterModal() {
+    document.getElementById('registerModal').style.display = 'flex';
+    document.getElementById('registerError').textContent = '';
+    document.getElementById('registerUser').value = '';
+    document.getElementById('registerPass').value = '';
+    document.getElementById('registerPass2').value = '';
+    setTimeout(() => { document.getElementById('registerUser').focus(); }, 200);
+  }
+  function closeRegisterModal() {
+    document.getElementById('registerModal').style.display = 'none';
+  }
+  function switchToRegister(e) {
+    e.preventDefault();
+    closeLoginModal();
+    showRegisterModal();
+  }
+  function switchToLogin(e) {
+    e.preventDefault();
+    closeRegisterModal();
+    showLoginModal();
+  }
+  function registerAccount() {
+    const user = document.getElementById('registerUser').value.trim();
+    const pass = document.getElementById('registerPass').value.trim();
+    const pass2 = document.getElementById('registerPass2').value.trim();
+    const error = document.getElementById('registerError');
+    if (!user || !pass || !pass2) {
+      error.textContent = 'All fields are required.';
+      return;
+    }
+    if (pass !== pass2) {
+      error.textContent = 'Passwords do not match.';
+      return;
+    }
+    // Get users from localStorage
+    let users = JSON.parse(localStorage.getItem('gilads_accounts') || '{}');
+    if (users[user]) {
+      error.textContent = 'Username already exists.';
+      return;
+    }
+    users[user] = pass;
+    localStorage.setItem('gilads_accounts', JSON.stringify(users));
+    error.style.color = 'green';
+    error.textContent = 'Registration successful! You can now login.';
+    setTimeout(() => {
+      closeRegisterModal();
+      showLoginModal();
+    }, 1200);
   }
 </script>
 
