@@ -7,129 +7,541 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f8f9fa;
+    :root {
+      --primary: #232323;
+      --secondary: #b71c1c;
+      --accent: #e53935;
+      --light: #f8fafc;
+      --surface: #fff;
+      --shadow: 0 4px 32px rgba(34,34,59,0.10);
+      --radius: 18px;
+      --gray: #e0e0e0;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: var(--gray);
+      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
       scroll-behavior: smooth;
     }
-
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
     nav {
-      background-color: #343a40;
+      background: var(--primary);
       color: white;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 18px 48px;
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 2px 8px rgba(34,34,59,0.08);
     }
-
     .logo-text {
-      font-size: 1.5rem;
+      font-size: 2.1rem;
       font-weight: bold;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-
+    .logo-text img {
+      height: 38px;
+      width: 38px;
+      border-radius: 50%;
+      background: #fff;
+      object-fit: cover;
+      border: 2px solid var(--secondary);
+    }
     nav ul {
       list-style: none;
       display: flex;
-      gap: 20px;
+      gap: 36px;
       margin: 0;
+      padding: 0;
     }
-
     nav ul li a {
-      color: white;
+      color: #fff;
       text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      transition: color 0.2s, background 0.2s;
+      padding: 6px 12px;
+      border-radius: 6px;
     }
-
+    nav ul li a:hover, nav ul li a.active {
+      color: var(--secondary);
+      background: #fff;
+    }
     nav .menu-toggle {
       display: none;
-      font-size: 1.5rem;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+    }
+    #profileBox {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-left: 18px;
+    }
+    #profileName {
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+    #logoutBtn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 6px 18px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    #logoutBtn:hover {
+      background: var(--secondary);
+      color: #fff;
     }
 
+    /* HERO SECTION */
     header {
-      background: url('bg image.png') center/cover no-repeat;
+      min-height: 100vh;
+      width: 100vw;
+      background: linear-gradient(120deg, rgba(35,35,35,0.92) 60%, rgba(183,28,28,0.92) 100%);
       color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: var(--shadow);
+      border-radius: 0 0 var(--radius) var(--radius);
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('your-hero-bg.jpg') center center/cover no-repeat;
+      opacity: 0.18;
+      z-index: 1;
+    }
+    .hero-content {
       text-align: center;
-      padding: 100px 20px;
+      max-width: 650px;
+      margin: auto;
+      padding: 48px 24px 60px 24px;
+      background: rgba(35,35,35,0.10);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 32px rgba(34,34,59,0.10);
+      backdrop-filter: blur(2px);
+      position: relative;
+      z-index: 2;
     }
-
     .hero-content .logo {
-      width: 120px;
+      width: 140px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.10));
+      border-radius: 50%;
+      background: #fff;
+      padding: 10px;
+      border: 2px solid var(--secondary);
+    }
+    .hero-content h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(34,34,59,0.10);
+    }
+    .hero-content p {
+      font-size: 1.35rem;
+      color: #fff;
+      margin-bottom: 0;
+      font-weight: 500;
+      letter-spacing: 0.5px;
     }
 
+    /* NOTIFICATION */
+    #loginNotif {
+      display: none;
+      text-align: center;
+      background: #ffcdd2;
+      color: #b71c1c;
+      font-weight: 600;
+      padding: 12px 0;
+      margin-bottom: 0;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #e57373;
+    }
+
+    /* SECTION STYLES */
     section {
-      padding: 40px 20px;
-      background-color: white;
-      border-radius: 10px;
-      margin: 30px auto;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 48px 0 36px 0;
+      background: var(--surface);
+      border-radius: var(--radius);
+      margin: 48px auto 0 auto;
+      box-shadow: var(--shadow);
       max-width: 1100px;
+      width: 95%;
+      position: relative;
+    }
+    h2 {
+      color: var(--secondary);
+      font-weight: 800;
+      margin-bottom: 28px;
+      font-size: 2.1rem;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    section p {
+      font-size: 1.08rem;
+      color: #444;
+      margin-bottom: 18px;
+      line-height: 1.7;
+      text-align: justify;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
+    /* Services Section */
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 36px;
+      margin-top: 24px;
     }
-
+    .service-item {
+      background: #f5f5f5;
+      border-radius: 14px;
+      padding: 28px 18px 22px 18px;
+      box-shadow: 0 2px 16px rgba(34,34,59,0.07);
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1.5px solid #e0e0e0;
+    }
+    .service-item:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(34,34,59,0.13);
+      border-color: var(--accent);
+    }
     .service-item img {
-      width: 100%;
+      width: 90px;
       border-radius: 10px;
+      margin-bottom: 18px;
+      max-height: 90px;
+      object-fit: cover;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(34,34,59,0.08);
+      padding: 6px;
+      border: 2px solid var(--secondary);
+    }
+    .service-item h3 {
+      color: var(--secondary);
+      font-size: 1.25rem;
+      font-weight: 700;
       margin-bottom: 10px;
     }
-
-    .preview-img img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-top: 20px;
+    .service-item p {
+      color: #555;
+      font-size: 1.05rem;
+      margin-bottom: 0;
+      text-align: center;
     }
 
+    /* Products Section */
+    #products {
+      background: #f8f9fa;
+      margin-top: 48px;
+    }
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+      margin-bottom: 32px;
+      padding: 0;
+    }
+    .product-list .list-group-item {
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 0;
+      font-weight: 500;
+      background: #fff;
+      color: var(--primary);
+      font-size: 1.08rem;
+      min-width: 220px;
+      box-shadow: 0 1px 6px rgba(34,34,59,0.04);
+      padding: 16px 18px;
+      text-align: center;
+      position: relative;
+      overflow: visible;
+    }
+    .product-list .list-group-item:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(34,34,59,0.10);
+    }
+    .product-img {
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 24px;
+      width: 180px;
+      max-width: 40vw;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(34,34,59,0.12);
+      border: 2px solid var(--secondary);
+      background: #fff;
+      z-index: 10;
+      display: none;
+    }
+    .product-hover:hover .product-img,
+    .product-hover:focus-within .product-img {
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .product-img {
+        position: static;
+        transform: none;
+        margin: 14px auto 0 auto;
+        display: block !important;
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+
+    /* Contact Section */
+    #contact p, #contact a {
+      font-size: 1.08rem;
+      color: #444;
+      margin-bottom: 10px;
+      text-align: left;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #contact h2 {
+      margin-bottom: 18px;
+    }
+    #contact a {
+      color: var(--secondary);
+      text-decoration: underline;
+    }
+    #contact a:hover {
+      color: var(--accent);
+    }
+
+    /* Inquiry Form */
+    #inquiry-form {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      margin: 48px auto 0 auto;
+      padding: 40px 32px 32px 32px;
+      border: 2px solid var(--secondary);
+    }
+    #inquiry-form label {
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 4px;
+      display: block;
+    }
     #inquiry-form input,
     #inquiry-form textarea {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 5px;
-      margin-bottom: 15px;
-      border: 1px solid #ced4da;
-      border-radius: 5px;
+      margin-bottom: 18px;
+      border: 1.5px solid #bfc0c0;
+      border-radius: 7px;
+      background: #f8f9fa;
+      font-size: 1rem;
+      transition: border 0.2s;
     }
-
+    #inquiry-form input:focus,
+    #inquiry-form textarea:focus {
+      border: 1.5px solid var(--accent);
+      outline: none;
+    }
     #inquiry-form button {
-      background-color: #0d6efd;
+      background: linear-gradient(90deg, var(--secondary) 60%, var(--accent) 100%);
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
+      padding: 12px 28px;
+      border-radius: 7px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: background 0.2s;
+      margin-top: 10px;
+      box-shadow: 0 2px 8px rgba(34,34,59,0.08);
     }
-
-    footer {
+    #inquiry-form button:hover {
+      background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+    }
+    #formMessage {
+      margin-top: 1rem;
+      font-weight: 600;
       text-align: center;
-      padding: 20px;
-      background-color: #343a40;
-      color: white;
-      font-size: 0.9rem;
     }
 
+    /* Login Modal Styles */
+    #loginModal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(34,34,59,0.45);
+      justify-content: center;
+      align-items: center;
+    }
+    #loginModal.active {
+      display: flex;
+    }
+    .login-modal {
+      background: #fff;
+      padding: 32px 28px 24px 28px;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(34,34,59,0.18);
+      min-width: 320px;
+      max-width: 90vw;
+      text-align: center;
+      position: relative;
+    }
+    .login-modal h3 {
+      color: var(--secondary);
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .login-modal input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 14px;
+      border: 1px solid #bfc0c0;
+      border-radius: 6px;
+      background: #f8f9fa;
+      font-size: 1rem;
+    }
+    .login-modal button {
+      background: var(--secondary);
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 6px;
+      transition: background 0.2s;
+    }
+    .login-modal button:hover {
+      background: var(--primary);
+    }
+    .login-modal .close-btn {
+      position: absolute;
+      top: 12px; right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: var(--accent);
+      cursor: pointer;
+    }
+    .login-modal .error-msg {
+      color: #b00020;
+      font-size: 0.98rem;
+      margin-bottom: 8px;
+      min-height: 22px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      section, #inquiry-form {
+        max-width: 98vw;
+      }
+      .hero-content {
+        max-width: 98vw;
+      }
+    }
+    @media (max-width: 900px) {
+      nav {
+        padding: 12px 16px;
+      }
+      .hero-content {
+        padding: 32px 8px 40px 8px;
+      }
+      section, #inquiry-form {
+        padding: 32px 8px 24px 8px;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
     @media (max-width: 768px) {
       nav ul {
         display: none;
         flex-direction: column;
-        background-color: #343a40;
+        background: var(--primary);
         position: absolute;
         top: 60px;
         left: 0;
         width: 100%;
+        z-index: 1001;
       }
-
       nav ul.active {
         display: flex;
       }
-
       nav .menu-toggle {
         display: block;
       }
+      section, #inquiry-form {
+        padding: 18px 4vw 12px 4vw;
+        margin-top: 24px;
+      }
+      header {
+        min-height: 70vh;
+        padding: 0;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+    }
+    @media (max-width: 500px) {
+      .hero-content h1 {
+        font-size: 1.3rem;
+      }
+      .logo-text {
+        font-size: 1.1rem;
+      }
+      .service-item img {
+        width: 60px;
+        max-height: 60px;
+      }
+    }
+    footer {
+      text-align: center;
+      padding: 24px;
+      background: var(--primary);
+      color: #f2e9e4;
+      font-size: 1rem;
+      border-radius: 24px 24px 0 0;
+      margin-top: 40px;
+      box-shadow: 0 -2px 8px rgba(34,34,59,0.08);
     }
   </style>
 </head>
@@ -137,15 +549,22 @@
 
 <!-- Navigation -->
 <nav>
-  <div class="logo-text">GIL ADS Contractor</div>
+  <div class="logo-text">
+    <img src="logo.png" alt="Logo" />
+    GIL ADS Contractor
+  </div>
   <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
   <ul id="nav-menu">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#products">Products</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#inquiry-form">Inquire</a></li>
+    <li><a href="#inquiry-form" onclick="requireLogin(event)"> Login/Inquire</a></li>
   </ul>
+  <div id="profileBox" style="display:none; align-items:center; gap:10px;">
+    <span id="profileName" style="color:#fff; font-weight:600;"></span>
+    <button id="logoutBtn" onclick="logout()">Logout</button>
+  </div>
 </nav>
 
 <!-- Hero Section -->
@@ -157,12 +576,17 @@
   </div>
 </header>
 
+<!-- Add notification area below header -->
+<div id="loginNotif"></div>
+
 <!-- About -->
 <section id="about">
   <h2>About Company</h2>
   <p>
     GIL ADS CONTRACTOR, a genuine outgrowth of 3M Philippines’ official contractor: (Modagraphics Corporation and Omega Advertising Incorporated).
-    The owner who worked as the General Manager is continually increasing his manual and technological skills through Graphic Expo Seminars and Annual Product Trainings. He endows his decade of service manufacturing numerous Advertising Projects starting from small acrylic plastic molding, to module fabrication and then fully developed into an over-all boutique construction.
+  </p>
+  <p>
+    The owner, who worked as the General Manager, is continually increasing his manual and technological skills through Graphic Expo Seminars and Annual Product Trainings. He endows his decade of service manufacturing numerous Advertising Projects starting from small acrylic plastic molding, to module fabrication and then fully developed into an over-all boutique construction.
   </p>
   <p>
     GIL ADS administers its marketing and production office in Quezon City. The company is equipped with fabrication facilities and complete delivery services for your construction and manufacturing needs. We are handling three (3) shifts of manpower resources who are physically trained to offer you 24 hours quality service.
@@ -198,18 +622,39 @@
 <section id="products">
   <h2 class="text-center mb-4">Our Products</h2>
   <ul class="list-group product-list">
-    <li class="list-group-item" data-img="arc.png">Acrylic Plastic Built Up with LED Light</li>
-    <li class="list-group-item" data-img="stainless fetch].png">STAINLESS ETCHING</li>
-    <li class="list-group-item" data-img="pana.png">Panaflex</li>
-    <li class="list-group-item" data-img="island.png">ISLAND MODULES</li>
-    <li class="list-group-item" data-img="menu.png">MENU BOARD</li>
-    <li class="list-group-item" data-img="conopy.png">CANOPY STAND &amp; STEEL</li>
-    <li class="list-group-item" data-img="booth.png">BOOTH STAND</li>
-    <li class="list-group-item" data-img="stick.png">STICKER INSTALLATION</li>
+    <li class="list-group-item product-hover" data-img="arc.png">
+      <span>Acrylic Plastic Built Up with LED Light</span>
+      <img src="arc.png" alt="Acrylic Plastic Built Up with LED Light" class="product-img" />
+    </li>
+    <li class="list-group-item product-hover" data-img="stainless fetch].png">
+      <span>STAINLESS ETCHING</span>
+      <img src="stainless fetch].png" alt="STAINLESS ETCHING" class="product-img" />
+    </li>
+    <li class="list-group-item product-hover" data-img="pana.png">
+      <span>Panaflex</span>
+      <img src="pana.png" alt="Panaflex" class="product-img" />
+    </li>
+    <li class="list-group-item product-hover" data-img="island.png">
+      <span>ISLAND MODULES</span>
+      <img src="island.png" alt="ISLAND MODULES" class="product-img" />
+    </li>
+    <li class="list-group-item product-hover" data-img="menu.png">
+      <span>MENU BOARD</span>
+      <img src="menu.png" alt="MENU BOARD" class="product-img" />
+    </li>
+    <li class="list-group-item product-hover" data-img="conopy.png">
+      <span>CANOPY STAND &amp; STEEL</span>
+      <img src="conopy.png" alt="CANOPY STAND & STEEL" class="product-img" />
+    </li>
+    <li class="list-group-item product-hover" data-img="booth.png">
+      <span>BOOTH STAND</span>
+      <img src="booth.png" alt="BOOTH STAND" class="product-img" />
+    </li>
+    <li class="list-group-item product-hover" data-img="stick.png">
+      <span>STICKER INSTALLATION</span>
+      <img src="stick.png" alt="STICKER INSTALLATION" class="product-img" />
+    </li>
   </ul>
-  <div id="preview" class="preview-img">
-    <img src="" alt="Product Preview" />
-  </div>
 </section>
 
 <!-- Contact Section -->
@@ -226,7 +671,7 @@
 </section>
 
 <!-- Inquiry Form -->
-<section id="inquiry-form">
+<section id="inquiry-form" style="display:none;">
   <h2>Send Us an Inquiry</h2>
   <form id="contactForm" onsubmit="handleSubmit(event)">
     <label for="name">Your Name *</label>
@@ -243,37 +688,114 @@
 
     <button type="submit">Submit Inquiry</button>
   </form>
-  <p id="formMessage" style="margin-top:1rem; font-weight:600;"></p>
+  <p id="formMessage"></p>
 </section>
+
+<!-- Login Modal -->
+<div id="loginModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:2000; align-items:center; justify-content:center;">
+  <div class="login-modal">
+    <button class="close-btn" onclick="closeLoginModal()">&times;</button>
+    <h3>Customer Login</h3>
+    <div class="error-msg" id="loginError"></div>
+    <input type="text" id="loginUser" placeholder="Username" autocomplete="username" />
+    <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password" />
+    <button onclick="login()">Login</button>
+  </div>
+</div>
 
 <!-- Footer -->
 <footer>
   &copy; 2025 GIL ADS Contractor. All rights reserved.
 </footer>
 
-<!-- Scripts -->
 <script>
   // Navigation menu toggle
   function toggleMenu() {
     document.getElementById('nav-menu').classList.toggle('active');
   }
 
-  // Product image preview
-  const productItems = document.querySelectorAll('.product-list .list-group-item');
-  const previewImg = document.querySelector('#preview img');
+  // Show profile and logout if logged in
+  function updateProfileUI() {
+    const user = localStorage.getItem('gilads_user');
+    const profileBox = document.getElementById('profileBox');
+    const profileName = document.getElementById('profileName');
+    if (user) {
+      profileBox.style.display = 'flex';
+      profileName.textContent = `👤 ${user}`;
+    } else {
+      profileBox.style.display = 'none';
+      profileName.textContent = '';
+    }
+  }
 
-  productItems.forEach(item => {
-    item.addEventListener('mouseover', () => {
-      const imgSrc = item.getAttribute('data-img');
-      previewImg.src =  imgSrc;
-      previewImg.alt = item.textContent;
-    });
+  // Show notification
+  function showLoginNotif(user) {
+    const notif = document.getElementById('loginNotif');
+    notif.textContent = `Welcome, ${user}! You are now logged in.`;
+    notif.style.display = 'block';
+    setTimeout(() => { notif.style.display = 'none'; }, 3500);
+  }
 
-    item.addEventListener('mouseout', () => {
-      previewImg.src = '';
-      previewImg.alt = '';
+  // Logout function
+  function logout() {
+    localStorage.removeItem('gilads_user');
+    localStorage.removeItem('gilads_pass');
+    document.getElementById('inquiry-form').style.display = 'none';
+    updateProfileUI();
+    location.reload();
+  }
+
+  // --- LOGIN LOGIC ---
+  function showLoginModal() {
+    document.getElementById('loginModal').style.display = 'flex';
+    document.getElementById('loginError').textContent = '';
+    document.getElementById('loginUser').value = '';
+    document.getElementById('loginPass').value = '';
+    setTimeout(() => { document.getElementById('loginUser').focus(); }, 200);
+  }
+  function closeLoginModal() {
+    document.getElementById('loginModal').style.display = 'none';
+  }
+  function login() {
+    const user = document.getElementById('loginUser').value.trim();
+    const pass = document.getElementById('loginPass').value.trim();
+    if (user && pass) {
+      localStorage.setItem('gilads_user', user);
+      localStorage.setItem('gilads_pass', pass);
+      closeLoginModal();
+      document.getElementById('inquiry-form').style.display = '';
+      document.getElementById('inquiry-form').scrollIntoView({behavior:'smooth'});
+      updateProfileUI();
+      showLoginNotif(user);
+    } else {
+      document.getElementById('loginError').textContent = 'Please enter username and password.';
+    }
+  }
+  // Allow Enter key to submit login
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('loginPass').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') login();
     });
+    document.getElementById('loginUser').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') login();
+    });
+    // Check if already logged in
+    if (localStorage.getItem('gilads_user') && localStorage.getItem('gilads_pass')) {
+      document.getElementById('inquiry-form').style.display = '';
+      updateProfileUI();
+    }
   });
+
+  // Require login before showing inquiry form
+  function requireLogin(e) {
+    if (!(localStorage.getItem('gilads_user') && localStorage.getItem('gilads_pass'))) {
+      e.preventDefault();
+      showLoginModal();
+    }
+  }
+
+  // Hide inquiry form by default
+  document.getElementById('inquiry-form').style.display = 'none';
 
   // Inquiry form submission
   function handleSubmit(event) {
