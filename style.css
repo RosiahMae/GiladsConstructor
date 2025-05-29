@@ -1,0 +1,208 @@
+/* ===========================
+   THEME & COLORS
+=========================== */
+:root {
+  --primary: #232323;
+  --secondary: #b71c1c;
+  --accent: #e53935;
+  --light: #f8fafc;
+  --surface: #fff;
+  --shadow: 0 4px 32px rgba(34, 34, 59, 0.10);
+  --radius: 18px;
+  --gray: #e0e0e0;
+}
+
+/* ===========================
+   GENERAL STYLES
+=========================== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--primary);
+  color: var(--light);
+  margin: 0;
+  padding: 0;
+}
+
+body.contact-page,
+body.inquire-page {
+  color: black;
+  background-color: var(--light);
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+.navbar {
+  background-color: var(--primary) !important;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--light);
+}
+
+.navbar-nav .nav-link {
+  color: var(--gray);
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--secondary);
+}
+
+/* ===========================
+   HEADER
+=========================== */
+header {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 6rem 0;
+  text-align: center;
+  color: var(--light);
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(35, 35, 35, 0.7);
+  z-index: 0;
+  border-radius: var(--radius);
+}
+
+header > .container {
+  position: relative;
+  z-index: 1;
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+header p.lead {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+header .btn-danger {
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  font-size: 1.1rem;
+  border-radius: var(--radius);
+  background-color: var(--secondary);
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+header .btn-danger:hover {
+  background-color: var(--accent);
+}
+
+/* ===========================
+   CONTACT FORM SECTION
+=========================== */
+.contact-section {
+  background-color: var(--light);
+  padding: 3rem 1rem;
+  border-radius: var(--radius);
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: var(--shadow);
+  color: black;
+}
+
+.contact-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.contact-form label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: calc(var(--radius) / 2);
+  border: 1px solid var(--gray);
+  background-color: var(--surface);
+  color: black;
+  transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  outline: none;
+}
+
+.contact-form button {
+  padding: 0.75rem 2rem;
+  background-color: var(--secondary);
+  color: var(--light);
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: var(--accent);
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+  background-color: var(--primary);
+  color: var(--gray);
+  font-size: 0.9rem;
+  padding: 1rem 0;
+  margin-top: 3rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.owner-card {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background-color: var(--surface);
+  color: black;
+  padding: 2rem;
+}
+
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 575.98px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p.lead {
+    font-size: 1rem;
+  }
+
+  .product-img {
+    height: 120px;
+  }
+
+  .contact-section {
+    padding: 2rem 1rem;
+  }
+}
