@@ -12,6 +12,76 @@
   --gray: #e0e0e0;
 }
 
+
+/* ===========================
+   PRODUCT DETAILS
+=========================== */
+.product-details {
+  color: black !important;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.product-details h2 {
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+/* ===========================
+   PRODUCT CARD
+=========================== */
+.product-card {
+  background-color: var(--primary);
+  border: 1px solid var(--gray);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.product-card:hover {
+  box-shadow: 0 0 15px var(--accent);
+}
+
+.product-img {
+  max-width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  border-radius: var(--radius);
+}
+
+.product-card h5 {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+}
+
+.product-card p {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--gray);
+  margin-bottom: 1rem;
+}
+
+.product-card .btn {
+  border-radius: var(--radius);
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  background-color: var(--secondary);
+  border: none;
+  color: var(--light);
+  transition: background-color 0.3s ease;
+}
+
+.product-card .btn:hover {
+  background-color: var(--accent);
+  color: var(--light);
+}
 /* ===========================
    GENERAL STYLES
 =========================== */
