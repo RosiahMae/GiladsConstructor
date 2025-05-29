@@ -1,0 +1,127 @@
+<!-- products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Products - GIL ADS Constructor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .product-card {
+      border: 1px solid var(--gray);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .product-img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+    }
+    .product-details {
+      display: none;
+      margin-top: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .product-card.active .product-details {
+      display: block;
+      opacity: 1;
+    }
+    .inquire-btn {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="logo.png" alt="GIL ADS Logo" style="height: 40px; width: auto;" class="me-2" />
+        GIL ADS Constructor
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="inquire.html">Inquire</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="container py-5">
+    <h2 class="mb-4">Our Products</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="arc.png" alt="Acrylic Plastic Built Up with LED Light" class="product-img">
+        <h5>Acrylic Plastic Built Up with LED Light</h5>
+        <div class="product-details">Elegant signage with energy-efficient LED lighting.<br>Price: ₱1,850<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+      </div>
+      <div class="product-card">
+        <img src="stainless fetch].png" alt="STAINLESS ETCHING" class="product-img">
+        <h5>STAINLESS ETCHING</h5>
+        <div class="product-details">Durable and sleek etched stainless metal signs.<br>Price: ₱2,200<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+      </div>
+      <div class="product-card">
+        <img src="pana.png" alt="Panaflex" class="product-img">
+        <h5>Panaflex</h5>
+        <div class="product-details">Flexible printed banners ideal for outdoor display.<br>Price: ₱1,000<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+      </div>
+      <div class="product-card">
+        <img src="island.png" alt="ISLAND MODULES" class="product-img">
+        <h5>ISLAND MODULES</h5>
+        <div class="product-details">Customized modular displays for booths and exhibits.<br>Price: ₱3,500<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+      </div>
+      <div class="product-card">
+        <img src="menu.png" alt="MENU BOARD" class="product-img">
+        <h5>MENU BOARD</h5>
+        <div class="product-details">Stylish menu boards perfect for restaurants and cafes.<br>Price: ₱1,600<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+      </div>
+      <div class="product-card">
+        <img src="conopy.png" alt="CANOPY STAND &amp; STEEL" class="product-img">
+        <h5>CANOPY STAND &amp; STEEL</h5>
+        <div class="product-details">Strong and weather-resistant canopies and steel stands.<br>Price: ₱4,200<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+      </div>
+      <div class="product-card">
+        <img src="booth.png" alt="BOOTH STAND" class="product-img">
+        <h5>BOOTH STAND</h5>
+        <div class="product-details">High-quality booth displays for marketing events.<br>Price: ₱2,800<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+      </div>
+      <div class="product-card">
+        <img src="stick.png" alt="STICKER INSTALLATION" class="product-img">
+        <h5>STICKER INSTALLATION</h5>
+        <div class="product-details">Professional vinyl sticker printing and installation.<br>Price: ₱1,200<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center p-4 bg-dark text-light mt-5">
+    &copy; 2025 GIL ADS Constructor. All rights reserved.
+  </footer>
+
+  <script>
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
