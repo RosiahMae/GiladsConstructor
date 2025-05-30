@@ -43,7 +43,7 @@
       height: 72px;
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 2000;
     }
     .logo-container {
       display: flex;
@@ -265,6 +265,16 @@
       overflow: hidden;
       animation: fadeInUp 0.7s;
     }
+    /* Responsive: fix to bottom even on mobile */
+    @media (max-width: 900px) {
+      .chatbot-container {
+        right: 4px;
+        bottom: 4px;
+        width: 98vw;
+        position: fixed;
+        max-width: 98vw;
+      }
+    }
     .chatbot-header {
       background: var(--secondary);
       color: var(--light);
@@ -399,6 +409,7 @@
     <div class="inquiry-form-container" style="max-width:600px;flex:1 1 340px;">
       <h2>Inquiry Form</h2>
       <div id="successMessage" class="success-message">Your inquiry has been sent successfully!</div>
+      <!-- Add "How many/pcs" field and estimated price display to the form -->
       <form id="inquiry-form" autocomplete="off">
         <label for="customerName">Your Name</label>
         <input type="text" id="customerName" required placeholder="Full Name" />
@@ -428,6 +439,11 @@
         <label for="productSize">Size / Dimensions</label>
         <input type="text" id="productSize" required placeholder="e.g. 2ft x 3ft" />
 
+        <label for="productQty">How many / pcs.</label>
+        <input type="number" id="productQty" min="1" value="1" required placeholder="Quantity" />
+
+        <div id="estimatedPrice" style="margin:10px 0 18px 0;font-weight:700;color:#b71c1c;">Estimated Price: ₱25,000</div>
+
         <label for="message">Message / Details</label>
         <textarea id="message" rows="4" placeholder="Additional details or requirements..."></textarea>
 
@@ -435,7 +451,7 @@
       </form>
     </div>
     <!-- Chatbot beside the form -->
-    <div class="chatbot-container" id="chatbotContainer" style="display:flex;position:static;box-shadow:0 4px 32px rgba(34,34,59,0.13);margin-top:0;flex:1 1 340px;max-width:340px;min-width:260px;">
+    <div class="chatbot-container" id="chatbotContainer">
       <div class="chatbot-header">Gil Ads Chatbot</div>
       <div class="chatbot-messages" id="chatbotMessages">
         <div><b>Bot:</b> Hi! How can I help you today?</div>
@@ -508,11 +524,11 @@
         } else if (msg.includes('product')) {
           botMsg = "We offer Acrylic LED Signs, Stainless Etching, Panaflex, Island Modules, Menu Boards, Canopy Stands, Booth Stands, and Sticker Installation. Would you like to know the price or details of a specific product?";
         } else if (msg.includes('price')) {
-          botMsg = "Our prices vary by product and size. For example, Acrylic LED Signs start at ₱1,850. Please select a product in the form for a more accurate quote.";
+          botMsg = "Our prices vary by product and size. For example, Acrylic LED Signs start at ₱45,000. Please select a product in the form for a more accurate quote.";
         } else if (msg.includes('order')) {
           botMsg = "To order, fill out the inquiry form with your details and selected product. We'll get back to you for confirmation! Would you like help filling out the form?";
         } else if (msg.includes('location')) {
-          botMsg = "Our office is located at 123 Main St, Novaliches, Quezon City. Would you like directions or our contact number?";
+          botMsg = "Our office is located at 553 Riverside West Los Angeles St. California Village. San Bartolome. Would you like directions or our contact number?";
         } else if (msg.includes('contact') || msg.includes('phone')) {
           botMsg = "You can call us at +63 912 345 6789 or email marcgilbereber9@gmail.com. How else can I assist you?";
         } else if (msg.includes('thank')) {
@@ -549,6 +565,59 @@
         if (e.key === 'Enter') window.sendChatbotMessage();
       });
 
+      // --- Estimated Price Logic ---
+      const productDetails = {
+        "Acrylic Plastic Built Up with LED Light": { base: 45000 },
+        "STAINLESS ETCHING": { base: 9500 },
+        "Panaflex": { base: 28000 },
+        "ISLAND MODULES": { base: 25000 },
+        "MENU BOARD": { base: 10000 },
+        "CANOPY STAND & STEEL": { base: 30000 },
+        "BOOTH STAND": { base: 25000 },
+        "STICKER INSTALLATION": { base: 5000 },
+        "SIGNAGE": { base: 10000 }
+      };
+
+      const estimatedPriceDiv = document.getElementById('estimatedPrice');
+      const productSelect = document.getElementById('selectedProduct');
+      const qtyInput = document.getElementById('productQty');
+      const sizeInput = document.getElementById('productSize');
+
+      function getRandomSizeAddition(size) {
+        // Add 10k to 20k depending on size string (simulate randomness)
+        if (!size) return 10000;
+        let hash = 0;
+        for (let i = 0; i < size.length; i++) hash += size.charCodeAt(i);
+        return 10000 + (hash % 11001); // 10000 to 21000
+      }
+
+      function updateEstimatedPrice() {
+        const product = productSelect.value;
+        const qty = Math.max(1, parseInt(qtyInput.value) || 1);
+        const size = sizeInput.value.trim();
+        let base = productDetails[product] ? productDetails[product].base : 0;
+        let sizeAdd = getRandomSizeAddition(size);
+        let price = product ? (base + sizeAdd) * qty : 0;
+        if (price < 25000 && price > 0) price = 25000; // Minimum 25k
+        if (!product) {
+          estimatedPriceDiv.innerHTML = "Estimated Price: ₱25,000";
+        } else {
+          estimatedPriceDiv.innerHTML = `
+            <div>
+              <b>${product}</b><br>
+              <span style="color:#b71c1c;font-weight:700;">Estimated Price: ₱${price.toLocaleString()}</span>
+            </div>
+          `;
+        }
+      }
+
+      productSelect.addEventListener('change', updateEstimatedPrice);
+      qtyInput.addEventListener('input', updateEstimatedPrice);
+      sizeInput.addEventListener('input', updateEstimatedPrice);
+
+      // Initialize on load
+      updateEstimatedPrice();
+
       // Modal logic
       const inquiryModal = document.getElementById('inquiryModal');
       const modalSummary = document.getElementById('modalSummary');
@@ -570,7 +639,12 @@
         const address = document.getElementById('customerAddress').value;
         const product = document.getElementById('selectedProduct').value;
         const size = document.getElementById('productSize').value;
+        const qty = document.getElementById('productQty').value;
         const message = document.getElementById('message').value;
+        let base = productDetails[product] ? productDetails[product].base : 0;
+        let sizeAdd = getRandomSizeAddition(size);
+        let price = product ? (base + sizeAdd) * qty : 0;
+        if (price < 25000 && price > 0) price = 25000;
 
         // Show summary in modal
         modalSummary.innerHTML = `
@@ -580,23 +654,24 @@
           <b>Address:</b> ${address}<br>
           <b>Product:</b> ${product}<br>
           <b>Size:</b> ${size}<br>
+          <b>Quantity:</b> ${qty}<br>
+          <b>Estimated Price:</b> ₱${price.toLocaleString()}<br>
           <b>Message:</b> ${message ? message : '<i>No additional details</i>'}
         `;
         modalMessage.style.display = 'none';
         inquiryModal.style.display = 'flex'; // Show modal now
 
         // Store for sending
-        window._inquiryData = { name, email, phone, address, product, size, message };
+        window._inquiryData = { name, email, phone, address, product, size, qty, price, message };
       });
 
-      // Confirm & "send" (simulate email)
       confirmInquiryBtn.onclick = function() {
         modalMessage.style.display = 'block';
-        // Simulate sending email (here you would use backend/email API)
         setTimeout(() => {
           inquiryModal.style.display = 'none';
           inquiryForm.reset();
           successMessage.style.display = 'block';
+          updateEstimatedPrice();
           setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
         }, 1200);
       };
