@@ -3,157 +3,229 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About Us - GIL ADS Constructor</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="style.css" rel="stylesheet" />
+  <title>About Us - Gil Ads Contractor</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <style>
+    :root {
+      --primary: #232323;
+      --secondary: #b71c1c;
+      --accent: #e53935;
+      --light: #f8fafc;
+      --surface: #fff;
+      --shadow: 0 4px 32px rgba(34, 34, 59, 0.1);
+      --radius: 18px;
+      --gray: #e0e0e0;
+      --dark-gray: #5f5f5f;
+      --transition: 0.3s cubic-bezier(.4,2,.6,1);
+      --glass: rgba(255,255,255,0.7);
+    }
+    html, body {
+      height: 100%;
+      min-height: 100%;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, var(--light) 60%, var(--gray) 100%);
+      color: var(--primary);
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    .logo-container img {
+      height: 48px;
+      margin-right: 16px;
+      filter: drop-shadow(0 2px 8px var(--gray));
+    }
+    .logo-container span {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--secondary);
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 8px var(--gray);
+    }
+    nav {
+      display: flex;
+      gap: 32px;
+      margin-left: 32px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 500;
+      transition: color var(--transition), background var(--transition), box-shadow var(--transition);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 1.08rem;
+      letter-spacing: 0.5px;
+      background: transparent;
+    }
+    nav a:hover, nav a.active {
+      color: var(--surface);
+      background: var(--accent);
+      box-shadow: 0 2px 12px var(--accent);
+    }
+    .about-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      padding: 56px 16px 40px 16px;
+      flex: 1 0 auto;
+    }
+    .about-content {
+      background: var(--glass);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 40px 32px 32px 32px;
+      max-width: 800px;
+      margin: 0 auto 32px auto;
+      backdrop-filter: blur(6px);
+      border: 1.5px solid var(--gray);
+      animation: fadeInUp 1s cubic-bezier(.4,2,.6,1) forwards;
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .about-content h2 {
+      color: var(--secondary);
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+      letter-spacing: 1.2px;
+      text-align: center;
+      text-shadow: 0 2px 8px var(--gray);
+    }
+    .about-content p {
+      font-size: 1.13rem;
+      color: var(--primary);
+      margin-bottom: 0;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+    .owner-info {
+      background: var(--gray);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 32px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(34,34,59,0.08);
+    }
+    .owner-info h4 {
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 12px;
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+    }
+    .owner-info p {
+      margin: 0;
+      color: var(--primary);
+      font-size: 1rem;
+    }
+    .owner-info a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .owner-info a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    footer {
+      flex-shrink: 0;
+      background: var(--primary);
+      color: var(--light);
+      text-align: center;
+      padding: 24px 0 18px 0;
+      font-size: 1rem;
+      margin-top: 48px;
+      position: relative;
+      z-index: 2;
+      background-image: none;
+      box-shadow: 0 -2px 32px rgba(34,34,59,0.10);
+      letter-spacing: 1px;
+    }
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 16px;
+      }
+      .logo-container img {
+        height: 36px;
+      }
+      .about-content h2 {
+        font-size: 1.3rem;
+      }
+      .about-content {
+        padding: 24px 8px 18px 8px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="logo.png" alt="GIL ADS Logo" style="height: 40px; width: auto;" class="me-2" />
-        GIL ADS Constructor
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="inquire.html">Inquire</a></li>
-        </ul>
-      </div>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Gil Ads Contractor Logo">
+      <span>Gil Ads Contractor</span>
     </div>
-  </nav>
-
-  <!-- Main content -->
-  <section class="container py-5">
-    <h2>About GIL ADS Constructor</h2>
-    <p>
-      GIL ADS Constructor is the best advertising and printing shop in Quezon City. With years of experience,
-      we specialize in producing high-quality marketing and promotional materials using advanced printing
-      technologies and reliable design concepts.
-    </p>
-    <p>
-      We offer services such as signage fabrication, LED displays, panaflex, booth stands, and a wide
-      variety of advertising installations tailored to your needs.
-    </p>
-
-    <h3 class="mt-5">About Company</h3>
-    <p>
-      GIL ADS CONTRACTOR is a genuine outgrowth of 3M Philippines’ official contractors: Modagraphics Corporation
-      and Omega Advertising Incorporated.
-    </p>
-    <p>
-      The owner, who worked as the General Manager, is continually increasing his manual and technological
-      skills through Graphic Expo Seminars and Annual Product Trainings. He endows his decade of service
-      manufacturing numerous Advertising Projects starting from small acrylic plastic molding, to module
-      fabrication and then fully developed into an over-all boutique construction.
-    </p>
-    <p>
-      GIL ADS administers its marketing and production office in Quezon City. The company is equipped with
-      fabrication facilities and complete delivery services for your construction and manufacturing needs.
-      We are handling three (3) shifts of manpower resources who are physically trained to offer you 24 hours
-      quality service.
-    </p>
-    <p>
-      Our Company offers both local and provincial project constructions. Behind our proud technological skills
-      are humble officers who can attend to your inquiries daily.
-    </p>
-
-    <h3 class="mt-5">Our Services</h3>
-    <ul>
-      <li>LED Signage Fabrication</li>
-      <li>Stainless and Acrylic Signs</li>
-      <li>Sticker and Tarpaulin Printing</li>
-      <li>Menu Boards and Booth Setup</li>
-      <li>Canopy Structures</li>
-      <li>Custom Advertising Modules</li>
-    </ul>
-
-    <h3 class="mt-5">Facility</h3>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <img src="production.png" class="card-img-top" alt="Production Area" />
-          <div class="card-body">
-            <h5 class="card-title">Production Area</h5>
-            <p class="card-text">
-              State-of-the-art manufacturing and fabrication facilities to ensure quality and efficiency.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <img src="printing.png" class="card-img-top" alt="Printing Area" />
-          <div class="card-body">
-            <h5 class="card-title">Printing Area</h5>
-            <p class="card-text">
-              High-quality printing services with advanced equipment for crisp, vibrant output.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <img src="laser.png" class="card-img-top" alt="Laser Cutting Area" />
-          <div class="card-body">
-            <h5 class="card-title">Laser Cutting Area</h5>
-            <p class="card-text">
-              Precision laser cutting technology for custom designs and perfect finishes.
-            </p>
-          </div>
-        </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="products.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  <section class="about-section">
+    <div class="about-content">
+      <h2>About Us</h2>
+      <p>
+        GIL ADS CONTRACTOR, a genuine outgrowth of 3M Philippines’ official contractor: Modagraphics Corporation and Omega Advertising Incorporated. <br>
+        The owner who worked as the General Manager is continually increasing his manual and technological skills through Graphic Expo Seminars and Annual Product Trainings.
+        He endows his decade of service manufacturing numerous Advertising Projects starting from small acrylic plastic molding, to module fabrication, and then fully developed into an over-all boutique construction.
+        <br><br>
+        GIL ADS administers its marketing and production office in Quezon City. The company is equipped with fabrication facilities and complete delivery services. We handle three shifts of manpower trained to offer 24-hour service. Our company offers both local and provincial project constructions.
+      </p>
+      <div class="owner-info">
+        <h4>Owner Information</h4>
+        <p><strong>Name:</strong> Gil Bereber</p>
+        <p><strong>Email:</strong> <a href="mailto:marcgilbereber9@gmail.com">marcgilbereber9@gmail.com</a></p>
       </div>
     </div>
   </section>
-
-  <footer class="text-center p-4 bg-dark text-light mt-5">
-    &copy; 2025 GIL ADS Constructor. All rights reserved.
+  <footer>
+    &copy; 2025 Gil Ads Contractor. All rights reserved.
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.add("fade-in");
-  });
-
-  // Attach to all internal links for fade out before navigating
-  document.querySelectorAll('a[href^]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-
-      // Only fade out for same-site pages (ignore external or anchors)
-      if (
-        href &&
-        !href.startsWith('http') &&
-        !href.startsWith('#') &&
-        !href.startsWith('mailto:') &&
-        !href.startsWith('tel:')
-      ) {
-        e.preventDefault();
-        document.body.classList.remove("fade-in");
-        document.body.classList.add("fade-out");
-        setTimeout(() => {
-          window.location.href = href;
-        }, 500); // time must match CSS transition duration
-      }
+    // Animate about-content on load
+    window.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('.about-content').style.opacity = 1;
+      document.querySelector('.about-content').style.transform = 'translateY(0) scale(1)';
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
