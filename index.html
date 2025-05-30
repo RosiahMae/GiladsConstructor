@@ -1,79 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GIL ADS Constructor</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="style.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" type="image/png" href="logo.png">
+  <title>Gil Ads Contractor</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <style>
+    :root {
+      --primary: #232323;
+      --secondary: #b71c1c;
+      --accent: #e53935;
+      --light: #f8fafc;
+      --surface: #fff;
+      --shadow: 0 4px 32px rgba(34, 34, 59, 0.1);
+      --radius: 18px;
+      --gray: #e0e0e0;
+      --dark-gray: #5f5f5f;
+      --transition: 0.3s cubic-bezier(.4,2,.6,1);
+      --glass: rgba(255,255,255,0.7);
+    }
+    html, body {
+      height: 100%;
+      min-height: 100%;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, var(--light) 60%, var(--gray) 100%);
+      color: var(--primary);
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    .logo-container img {
+      height: 48px;
+      margin-right: 16px;
+      filter: drop-shadow(0 2px 8px var(--gray));
+    }
+    .logo-container span {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--secondary);
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px var(--gray);
+    }
+    nav {
+      display: flex;
+      gap: 32px;
+      margin-left: 32px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 500;
+      transition: color var(--transition), background var(--transition), box-shadow var(--transition);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 1.08rem;
+      letter-spacing: 0.5px;
+      background: transparent;
+    }
+    nav a:hover, nav a.active {
+      color: var(--surface);
+      background: var(--accent);
+      box-shadow: 0 2px 12px var(--accent);
+    }
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: url('bg image.png') center/cover no-repeat;
+      position: relative;
+      text-align: center;
+      padding: 64px 16px 48px 16px;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(35,35,35,0.6);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* background: var(--glass); */ /* Remove background color */
+     
+      padding: 40px 32px 32px 32px;
+      max-width: 500px;
+      margin: 0 auto;
+      
+    
+      animation: fadeInUp 1s cubic-bezier(.4,2,.6,1) forwards;
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .hero-content img {
+      width: 160px;
+      height: 160px;
+      margin-bottom: 24px;
+      object-fit: contain;
+    }
+    @media (max-width: 600px) {
+      .hero-content img {
+        width: 100px;
+        height: 100px;
+      }
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 16px;
+      }
+      .logo-container img {
+        height: 36px;
+      }
+      .hero-content h1 {
+        font-size: 1.5rem;
+      }
+      .hero-content {
+        padding: 24px 8px 18px 8px;
+      }
+    }
+    .hero-content h1 {
+      font-size: 2.5rem;
+      color: var(--light);
+      margin: 0 0 16px 0;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .hero-content p {
+      font-size: 1.25rem;
+      color: white;
+      margin: 0 0 24px 0;
+      margin-bottom: 32px;
+      font-weight: 400;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .hero-content .cta-btn {
+      background: var(--accent);
+      color: var(--light);
+      border: none;
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: var(--radius);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: background var(--transition), color var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .hero-content .cta-btn:hover {
+      background: var(--secondary);
+      color: var(--surface);
+    }
+    footer {
+      background: var(--primary);
+      color: var(--light);
+      text-align: center;
+      padding: 24px 0 18px 0;
+      font-size: 1rem;
+      margin-top: 48px;
+      position: relative;
+      z-index: 2;
+      background-image: none;
+      box-shadow: 0 -2px 32px rgba(34,34,59,0.10);
+      letter-spacing: 1px;
+    }
+  </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="logo.png" alt="GIL ADS Logo" style="height: 40px; width: auto;" class="me-2" />
-        GIL ADS Constructor
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="inquire.html">Inquire</a></li>
-        </ul>
-      </div>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Gil Ads Contractor Logo">
+      <span>Gil Ads Contractor</span>
     </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <header class="hero-section text-center text-light d-flex flex-column justify-content-center align-items-center" style="background: url('bg image.png') no-repeat center center/cover; height: 100vh;">
-    <div class="container">
-      <img src="logo.png" alt="GIL ADS Logo" class="hero-logo mb-4" />
-      <h1 class="display-4 fw-bold">Welcome to GIL ADS Constructor</h1>
-      <p class="lead mb-4">Best Advertising and Printing Shop</p>
-      <a href="inquire.html" class="btn btn-danger btn-lg">Inquire Now</a>
-    </div>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
-
-  <footer class="text-center p-4 bg-dark text-light mt-5">
-    &copy; 2025 GIL ADS Constructor. All rights reserved.
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img src="logo.png" alt="Gil Ads Contractor Logo">
+      <h1>Gil Ads Contractor</h1>
+      <p>Makers of Good Quality Advertising Signs Since 2000!</p>
+      <button class="cta-btn">Inquire Now</button>
+    </div>
+  </section>
+  <footer>
+    &copy; 2024 Gil Ads Contractor. All rights reserved.
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.add("fade-in");
-  });
-
-  // Attach to all internal links for fade out before navigating
-  document.querySelectorAll('a[href^]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-
-      // Only fade out for same-site pages (ignore external or anchors)
-      if (
-        href &&
-        !href.startsWith('http') &&
-        !href.startsWith('#') &&
-        !href.startsWith('mailto:') &&
-        !href.startsWith('tel:')
-      ) {
-        e.preventDefault();
-        document.body.classList.remove("fade-in");
-        document.body.classList.add("fade-out");
-        setTimeout(() => {
-          window.location.href = href;
-        }, 500); // time must match CSS transition duration
-      }
+    // Animate hero-content on load
+    window.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('.hero-content').style.opacity = 1;
+      document.querySelector('.hero-content').style.transform = 'translateY(0) scale(1)';
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
