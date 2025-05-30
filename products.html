@@ -2,210 +2,448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Products - GIL ADS Constructor</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Services & Products - GIL ADS Contractor</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
   <style>
-       /* ===========================
-   PRODUCT CARD
-=========================== */
-.product-card {
-  background-color: var(--primary);
-  border: 1px solid var(--gray);
-  border-radius: var(--radius);
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  transition: box-shadow 0.3s ease;
-  box-shadow: var(--shadow);
-}
-
-.product-card:hover {
-  box-shadow: 0 0 15px var(--accent);
-}
-
-.product-img {
-  max-width: 100%;
-  height: 150px;
-  object-fit: contain;
-  margin-bottom: 1rem;
-  border-radius: var(--radius);
-}
-
-.product-card h5 {
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  color: var(--secondary);
-}
-
-.product-card p {
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--gray);
-  margin-bottom: 1rem;
-}
-
-.product-card .btn {
-  border-radius: var(--radius);
-  font-weight: 600;
-  padding: 0.4rem 1rem;
-  background-color: var(--secondary);
-  border: none;
-  color: var(--light);
-  transition: background-color 0.3s ease;
-}
-
-.product-card .btn:hover {
-  background-color: var(--accent);
-  color: var(--light);
-}
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+    :root {
+      --primary: #232323;
+      --secondary: #b71c1c;
+      --accent: #e53935;
+      --light: #f8fafc;
+      --surface: #fff;
+      --shadow: 0 4px 32px rgba(34, 34, 59, 0.1);
+      --radius: 18px;
+      --gray: #e0e0e0;
+      --dark-gray: #5f5f5f;
+      --transition: 0.3s cubic-bezier(.4,2,.6,1);
+      --glass: rgba(255,255,255,0.7);
     }
-    .product-card {
-      border: 1px solid var(--gray);
-      border-radius: var(--radius);
-      padding: 1rem;
-      text-align: center;
-      box-shadow: var(--shadow);
+    html, body {
+      height: 100%;
+      min-height: 100%;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, var(--light) 60%, var(--gray) 100%);
+      color: var(--primary);
+      display: flex;
+      flex-direction: column;
+    }
+    header {
       background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    .logo-container img {
+      height: 48px;
+      margin-right: 16px;
+      filter: drop-shadow(0 2px 8px var(--gray));
+    }
+    .logo-container span {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--secondary);
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 8px var(--gray);
+    }
+    nav {
+      display: flex;
+      gap: 32px;
+      margin-left: 32px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 500;
+      transition: color var(--transition), background var(--transition), box-shadow var(--transition);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 1.08rem;
+      letter-spacing: 0.5px;
+      background: transparent;
+    }
+    nav a:hover, nav a.active {
+      color: var(--surface);
+      background: var(--accent);
+      box-shadow: 0 2px 12px var(--accent);
+    }
+
+    /* New UI: Glassmorphism Card Style */
+    .section-title {
+      text-align: center;
+      color: var(--secondary);
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 48px 0 32px 0;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 8px var(--gray);
+    }
+    .facility-grid, .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 48px;
+      padding: 0 40px;
+    }
+    .facility-card, .product-card {
+      background: var(--glass);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 32px rgba(34,34,59,0.13), 0 1.5px 8px var(--gray);
+      padding: 32px 24px 24px 24px;
+      text-align: left;
+      transition: transform 0.3s var(--transition), box-shadow 0.3s var(--transition);
       cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .product-img {
-      width: 100%;
-      max-height: 200px;
-      object-fit: contain;
-    }
-    .product-details {
-      display: none;
-      margin-top: 1rem;
+      backdrop-filter: blur(6px);
+      border: 1.5px solid var(--gray);
+      position: relative;
+      overflow: hidden;
       opacity: 0;
-      transition: opacity 0.3s ease;
-      color: black;
+      transform: translateY(40px) scale(0.98);
+      animation: fadeInUp 0.8s forwards;
     }
-    .product-card.active .product-details {
+    .facility-card:hover, .product-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 16px 40px var(--accent), 0 2px 12px var(--gray);
+      border-color: var(--accent);
+      z-index: 2;
+    }
+    .facility-card { animation-delay: 0.1s; }
+    .facility-card:nth-child(2) { animation-delay: 0.3s; }
+    .facility-card:nth-child(3) { animation-delay: 0.5s; }
+    .product-card { animation-delay: 0.2s; }
+    .product-card:nth-child(2) { animation-delay: 0.3s; }
+    .product-card:nth-child(3) { animation-delay: 0.4s; }
+    .product-card:nth-child(4) { animation-delay: 0.5s; }
+    .product-card:nth-child(5) { animation-delay: 0.6s; }
+    .product-card:nth-child(6) { animation-delay: 0.7s; }
+    .product-card:nth-child(7) { animation-delay: 0.8s; }
+    .product-card:nth-child(8) { animation-delay: 0.9s; }
+    .product-card:nth-child(9) { animation-delay: 1s; }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .facility-card img, .product-card img {
+      width: 100%;
+      max-width: 220px;
+      max-height: 140px;
+      object-fit: contain;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(34,34,59,0.08);
+      background: var(--gray);
       display: block;
-      opacity: 1;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .inquire-btn {
-      margin-top: 10px;
+    .facility-card h4, .product-card h5 {
+      color: var(--secondary);
+      font-weight: 800;
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+    }
+    .facility-card p, .product-card p {
+      color: var(--primary);
+      font-size: 1.08rem;
+      margin-bottom: 0;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+    .product-card b, .facility-card b {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    /* Tag for materials */
+    .tag {
+      display: inline-block;
+      background: var(--gray);
+      color: var(--dark-gray);
+      border-radius: 8px;
+      padding: 2px 10px;
+      font-size: 0.95em;
+      margin: 2px 4px 2px 0;
+      font-weight: 500;
+    }
+    /* Inquiry Section */
+    .inquire-section {
+      background: var(--glass);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 24px var(--gray);
+      max-width: 600px;
+      margin: 56px auto 0 auto;
+      padding: 40px 28px 32px 28px;
+      text-align: center;
+      backdrop-filter: blur(6px);
+      border: 1.5px solid var(--gray);
+    }
+    .inquire-section h3 {
+      color: var(--secondary);
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .inquire-section p {
+      color: var(--primary);
+      font-size: 1.13rem;
+      margin-bottom: 28px;
+    }
+    .cta-btn {
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      color: var(--light);
+      border: none;
+      padding: 16px 44px;
+      font-size: 1.13rem;
+      font-weight: 800;
+      border-radius: var(--radius);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: background var(--transition), color var(--transition), transform 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      outline: none;
+      border: 0;
+    }
+    .cta-btn:hover {
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      color: var(--surface);
+      transform: scale(1.06);
+    }
+    footer {
+      background: var(--primary);
+      color: var(--light);
+      text-align: center;
+      padding: 24px 0 18px 0;
+      font-size: 1rem;
+      margin-top: 48px;
+      position: relative;
+      z-index: 2;
+      background-image: none;
+      box-shadow: 0 -2px 32px rgba(34,34,59,0.10);
+      letter-spacing: 1px;
+    }
+    @media (max-width: 900px) {
+      .facility-grid, .product-grid {
+        grid-template-columns: 1fr 1fr;
+        padding: 0 12px;
+      }
+    }
+    @media (max-width: 700px) {
+      .facility-grid, .product-grid {
+        grid-template-columns: 1fr;
+        padding: 0 6px;
+      }
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 16px;
+      }
+      .logo-container img {
+        height: 36px;
+      }
+      nav {
+        margin-left: 0;
+        gap: 16px;
+      }
+      .section-title {
+        font-size: 1.3rem;
+        margin: 32px 0 18px 0;
+      }
+      .inquire-section {
+        padding: 24px 8px 18px 8px;
+      }
     }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="logo.png" alt="GIL ADS Logo" style="height: 40px; width: auto;" class="me-2" />
-        GIL ADS Constructor
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="products.html">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="inquire.html">Inquire</a></li>
-        </ul>
-      </div>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Gil Ads Contractor Logo">
+      <span>Gil Ads Contractor</span>
     </div>
-  </nav>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html" class="active">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-  <section class="container py-5">
-    <h2 class="mb-4">Our Projects</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <img src="arc.png" alt="Acrylic Plastic Built Up with LED Light" class="product-img">
-        <h5>Acrylic Plastic Built Up with LED Light</h5>
-        <div class="product-details">Elegant signage with energy-efficient LED lighting.<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+  <!-- Facilities Section -->
+  <section>
+    <h2 class="section-title">Our Facilities</h2>
+    <div class="facility-grid">
+      <div class="facility-card">
+        <img src="production.png" alt="Production Area">
+        <h4>Production Area</h4>
+        <p>
+          Our main production area is equipped with modern tools and skilled staff, ensuring quality fabrication and assembly of all advertising materials and signage.
+          <br>
+          <span class="tag">Fabrication</span>
+          <span class="tag">Assembly</span>
+          <span class="tag">Quality Control</span>
+        </p>
       </div>
-      <div class="product-card">
-        <img src="stainless fetch].png" alt="STAINLESS ETCHING" class="product-img">
-        <h5>STAINLESS ETCHING</h5>
-        <div class="product-details">Durable and sleek etched stainless metal signs.<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+      <div class="facility-card">
+        <img src="laser.png" alt="Laser Cutting Area">
+        <h4>Laser Cutting Area</h4>
+        <p>
+          Precision laser cutting for acrylic, metal, and other materials, allowing us to create intricate designs and custom signage with clean, professional finishes.
+          <br>
+          <span class="tag">Acrylic</span>
+          <span class="tag">Metal</span>
+          <span class="tag">Custom Design</span>
+        </p>
       </div>
-      <div class="product-card">
-        <img src="pana.png" alt="Panaflex" class="product-img">
-        <h5>Panaflex</h5>
-        <div class="product-details">Flexible printed banners ideal for outdoor display.<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
-      </div>
-      <div class="product-card">
-        <img src="island.png" alt="ISLAND MODULES" class="product-img">
-        <h5>ISLAND MODULES</h5>
-        <div class="product-details">Customized modular displays for booths and exhibits.<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
-      </div>
-      <div class="product-card">
-        <img src="menu.png" alt="MENU BOARD" class="product-img">
-        <h5>MENU BOARD</h5>
-        <div class="product-details">Stylish menu boards perfect for restaurants and cafes.<a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
-      </div>
-      <div class="product-card">
-        <img src="conopy.png" alt="CANOPY STAND &amp; STEEL" class="product-img">
-        <h5>CANOPY STAND &amp; STEEL</h5>
-        <div class="product-details">Strong and weather-resistant canopies and steel stands.<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
-      </div>
-      <div class="product-card">
-        <img src="booth.png" alt="BOOTH STAND" class="product-img">
-        <h5>BOOTH STAND</h5>
-        <div class="product-details">High-quality booth displays for marketing events.<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
-      </div>
-      <div class="product-card">
-        <img src="stick.png" alt="STICKER INSTALLATION" class="product-img">
-        <h5>STICKER INSTALLATION</h5>
-        <div class="product-details">Professional vinyl sticker printing and installation.<br><a href="inquire.html" class="btn btn-primary inquire-btn">Inquire</a></div>
+      <div class="facility-card">
+        <img src="printing.png" alt="Printing Area">
+        <h4>Printing Area</h4>
+        <p>
+          High-resolution digital printing for banners, stickers, panaflex, and more. We use advanced printers to deliver vibrant, long-lasting graphics for every project.
+          <br>
+          <span class="tag">Digital Print</span>
+          <span class="tag">Panaflex</span>
+          <span class="tag">Stickers</span>
+        </p>
       </div>
     </div>
   </section>
 
-  <footer class="text-center p-4 bg-dark text-light mt-5">
-    &copy; 2025 GIL ADS Constructor. All rights reserved.
+  <!-- Products/Projects Gallery Section -->
+  <section>
+    <h2 class="section-title">Project Gallery</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="arc.png" alt="Acrylic Plastic Built Up with LED Light">
+        <h5>Acrylic Plastic Built Up with LED Light</h5>
+        <p>
+          Elegant, custom-shaped signage made from high-quality acrylic plastic, internally illuminated with energy-efficient LED modules. 
+          <br><b>Materials:</b> Acrylic sheet, LED modules, aluminum frame, vinyl graphics.
+          <br><b>Best for:</b> Storefronts, offices, and indoor/outdoor branding.
+        </p>
+      </div>
+      <div class="product-card">
+        <img src="stainless fetch].png" alt="STAINLESS ETCHING">
+        <h5>STAINLESS ETCHING</h5>
+        <p>
+          Durable and sleek signage created by etching designs onto stainless steel plates, often filled with color for contrast.
+          <br><b>Materials:</b> Stainless steel, acid etching chemicals, paint infill (optional).
+          <br><b>Best for:</b> Corporate offices, building directories, and professional nameplates.
+        </p>
+      </div>
+      <div class="product-card">
+        <img src="pana.png" alt="Panaflex">
+        <h5>Panaflex</h5>
+        <p>
+          Flexible, weather-resistant banners printed on translucent panaflex material, stretched over a lighted or non-lighted frame.
+          <br><b>Materials:</b> Panaflex sheet, aluminum or steel frame, UV ink.
+          <br><b>Best for:</b> Outdoor signboards, billboards, and illuminated signage.
+        </p>
+      </div>
+      <div class="product-card">
+        <img src="island.png" alt="ISLAND MODULES">
+        <h5>ISLAND MODULES</h5>
+        <p>
+          Modular display units designed for exhibits and retail spaces, customizable in size and layout.
+          <br><b>Materials:</b> Aluminum, MDF board, acrylic, digital prints.
+          <br><b>Best for:</b> Trade shows, mall kiosks, and product displays.
+        </p>
+      </div>
+      <div class="product-card">
+        <img src="menu.png" alt="MENU BOARD">
+        <h5>MENU BOARD</h5>
+        <p>
+          Stylish and easy-to-update boards for displaying menus, made with acrylic or aluminum and printed graphics.
+          <br><b>Materials:</b> Acrylic, aluminum, vinyl print, LED (optional).
+          <br><b>Best for:</b> Restaurants, cafes, and food stalls.
+        </p>
+      </div>
+      <div class="product-card">
+        <img src="conopy.png" alt="CANOPY STAND">
+        <h5>CANOPY STAND</h5>
+        <p>
+          Sturdy, weather-resistant canopy stands with steel or aluminum frames and waterproof fabric covers.
+          <br><b>Materials:</b> Steel/aluminum frame, tarpaulin or canvas cover.
+          <br><b>Best for:</b> Outdoor events, bazaars, and promotional booths.
+        </p>
+      </div>
+      <div class="product-card">
+        <img src="booth.png" alt="BOOTH STAND">
+        <h5>BOOTH STAND</h5>
+        <p>
+          Custom-built booths for trade shows and exhibits, designed for easy assembly and branding.
+          <br><b>Materials:</b> Aluminum, MDF, acrylic, digital prints.
+          <br><b>Best for:</b> Exhibitions, conventions, and marketing events.
+        </p>
+      </div>
+      <div class="product-card">
+        <img src="stick.png" alt="STICKER INSTALLATION">
+        <h5>STICKER INSTALLATION</h5>
+        <p>
+          Professional installation of high-quality vinyl stickers for vehicles, windows, and walls.
+          <br><b>Materials:</b> Vinyl sticker, UV-resistant ink, transfer tape.
+          <br><b>Best for:</b> Vehicle wraps, window graphics, and wall branding.
+        </p>
+      </div>
+      <div class="product-card">
+        <img src="signage.png" alt="SIGNAGE">
+        <h5>SIGNAGE</h5>
+        <p>
+          Custom signage solutions tailored to your business needs, available in various materials and finishes.
+          <br><b>Materials:</b> Acrylic, stainless steel, panaflex, aluminum, vinyl, LED.
+          <br><b>Best for:</b> All business types, both indoor and outdoor applications.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inquiry Section -->
+  <section class="inquire-section">
+    <h3>Ready to Start Your Project?</h3>
+    <p>
+      Interested in our products or services? Click the button below to inquire and our team will get back to you as soon as possible!
+    </p>
+    <a href="inquire.html" class="cta-btn">Inquire Now</a>
+  </section>
+
+  <footer>
+    &copy; 2025 Gil Ads Contractor. All rights reserved.
   </footer>
 
   <script>
-    document.querySelectorAll('.product-card').forEach(card => {
-      card.addEventListener('click', () => {
-        card.classList.toggle('active');
+    // Animate cards on scroll
+    function animateOnScroll() {
+      const cards = document.querySelectorAll('.facility-card, .product-card');
+      const triggerBottom = window.innerHeight * 0.95;
+      cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if (cardTop < triggerBottom) {
+          card.style.opacity = 1;
+          card.style.transform = 'translateY(0) scale(1)';
+        }
       });
-    });
+    }
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
   </script>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.add("fade-in");
-  });
-
-  // Attach to all internal links for fade out before navigating
-  document.querySelectorAll('a[href^]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-
-      // Only fade out for same-site pages (ignore external or anchors)
-      if (
-        href &&
-        !href.startsWith('http') &&
-        !href.startsWith('#') &&
-        !href.startsWith('mailto:') &&
-        !href.startsWith('tel:')
-      ) {
-        e.preventDefault();
-        document.body.classList.remove("fade-in");
-        document.body.classList.add("fade-out");
-        setTimeout(() => {
-          window.location.href = href;
-        }, 500); // time must match CSS transition duration
-      }
-    });
-  });
-</script>
-
 </body>
 </html>
