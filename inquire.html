@@ -504,45 +504,79 @@
         let botMsg = '';
         const msg = userMsg.toLowerCase();
 
-        // "on typing" dynamic answer
-        if (msg.includes('acrylic')) {
-          botMsg = "Acrylic Plastic Built Up with LED Light is a custom signage made from acrylic with internal LED lighting. It's durable and modern, perfect for storefronts.";
-        } else if (msg.includes('stainless')) {
-          botMsg = "STAINLESS ETCHING signs are made from etched stainless steel for a premium, professional look. Great for offices and directories.";
-        } else if (msg.includes('panaflex')) {
-          botMsg = "Panaflex is a weather-resistant printed banner, ideal for outdoor signage and billboards.";
-        } else if (msg.includes('island module')) {
-          botMsg = "ISLAND MODULES are modular displays for exhibits and retail spaces, customizable in size and layout.";
-        } else if (msg.includes('menu board')) {
-          botMsg = "MENU BOARDs are stylish boards for displaying menus, made with acrylic or aluminum and printed graphics.";
-        } else if (msg.includes('canopy')) {
-          botMsg = "CANOPY STAND & STEEL are sturdy stands with steel frames and waterproof covers, perfect for outdoor events.";
-        } else if (msg.includes('booth')) {
-          botMsg = "BOOTH STANDs are custom-built booths for trade shows and marketing events, designed for easy assembly and branding.";
-        } else if (msg.includes('sticker')) {
-          botMsg = "STICKER INSTALLATION includes professional vinyl sticker printing and installation for vehicles, windows, and walls.";
-        } else if (msg.includes('product')) {
-          botMsg = "We offer Acrylic LED Signs, Stainless Etching, Panaflex, Island Modules, Menu Boards, Canopy Stands, Booth Stands, and Sticker Installation. Would you like to know the price or details of a specific product?";
-        } else if (msg.includes('price')) {
-          botMsg = "Our prices vary by product and size. For example, Acrylic LED Signs start at ₱45,000. Please select a product in the form for a more accurate quote.";
-        } else if (msg.includes('order')) {
-          botMsg = "To order, fill out the inquiry form with your details and selected product. We'll get back to you for confirmation! Would you like help filling out the form?";
-        } else if (msg.includes('location')) {
-          botMsg = "Our office is located at 553 Riverside West Los Angeles St. California Village. San Bartolome. Would you like directions or our contact number?";
-        } else if (msg.includes('contact') || msg.includes('phone')) {
-          botMsg = "You can call us at +63 912 345 6789 or email marcgilbereber9@gmail.com. How else can I assist you?";
-        } else if (msg.includes('thank')) {
-          botMsg = "You're welcome! If you have more questions, just ask.";
-        } else if (msg.includes('hello') || msg.includes('hi')) {
-          botMsg = "Hello! How can I help you today?";
-        } else if (msg.includes('how are you')) {
-          botMsg = "I'm just a bot, but I'm here to help you with your inquiries!";
-        } else if (msg.includes('delivery')) {
-          botMsg = "We deliver within Metro Manila and nearby provinces. Delivery fees depend on your location and order size.";
-        } else if (msg.includes('lead time') || msg.includes('how long')) {
-          botMsg = "Lead time depends on the product and quantity. Most orders are completed within 3-7 business days.";
-        } else {
-          botMsg = "Thank you for your question! We'll get back to you as soon as possible. You can also fill out the inquiry form for a faster response.";
+        // Product price lookup
+        const productPrices = {
+          "acrylic": "₱45,000",
+          "acrylic plastic built up with led light": "₱45,000",
+          "stainless": "₱9,500",
+          "stainless etching": "₱9,500",
+          "panaflex": "₱28,000",
+          "island module": "₱25,000",
+          "island modules": "₱25,000",
+          "menu board": "₱10,000",
+          "canopy": "₱30,000",
+          "canopy stand": "₱30,000",
+          "canopy stand & steel": "₱30,000",
+          "booth": "₱25,000",
+          "booth stand": "₱25,000",
+          "sticker": "₱5,000",
+          "sticker installation": "₱5,000",
+          "signage": "₱10,000"
+        };
+
+        // Check for price inquiry for a specific product
+        let found = false;
+        if (msg.includes('price') || msg.includes('cost') || msg.includes('how much')) {
+          for (const key in productPrices) {
+            if (msg.includes(key)) {
+              botMsg = `The estimated price for <b>${key.replace(/^\w/, c => c.toUpperCase())}</b> is <b>${productPrices[key]}</b>.`;
+              found = true;
+              break;
+            }
+          }
+        }
+
+        if (!found) {
+          // ...existing chatbot logic...
+          if (msg.includes('acrylic')) {
+            botMsg = "Acrylic Plastic Built Up with LED Light is a custom signage made from acrylic with internal LED lighting. It's durable and modern, perfect for storefronts.";
+          } else if (msg.includes('stainless')) {
+            botMsg = "STAINLESS ETCHING signs are made from etched stainless steel for a premium, professional look. Great for offices and directories.";
+          } else if (msg.includes('panaflex')) {
+            botMsg = "Panaflex is a weather-resistant printed banner, ideal for outdoor signage and billboards.";
+          } else if (msg.includes('island module')) {
+            botMsg = "ISLAND MODULES are modular displays for exhibits and retail spaces, customizable in size and layout.";
+          } else if (msg.includes('menu board')) {
+            botMsg = "MENU BOARDs are stylish boards for displaying menus, made with acrylic or aluminum and printed graphics.";
+          } else if (msg.includes('canopy')) {
+            botMsg = "CANOPY STAND & STEEL are sturdy stands with steel frames and waterproof covers, perfect for outdoor events.";
+          } else if (msg.includes('booth')) {
+            botMsg = "BOOTH STANDs are custom-built booths for trade shows and marketing events, designed for easy assembly and branding.";
+          } else if (msg.includes('sticker')) {
+            botMsg = "STICKER INSTALLATION includes professional vinyl sticker printing and installation for vehicles, windows, and walls.";
+          } else if (msg.includes('product')) {
+            botMsg = "We offer Acrylic LED Signs, Stainless Etching, Panaflex, Island Modules, Menu Boards, Canopy Stands, Booth Stands, and Sticker Installation. Would you like to know the price or details of a specific product?";
+          } else if (msg.includes('price')) {
+            botMsg = "Our prices vary by product and size. For example, Acrylic LED Signs start at ₱45,000. Please select a product in the form for a more accurate quote.";
+          } else if (msg.includes('order')) {
+            botMsg = "To order, fill out the inquiry form with your details and selected product. We'll get back to you for confirmation! Would you like help filling out the form?";
+          } else if (msg.includes('location')) {
+            botMsg = "Our office is located at 553 Riverside West Los Angeles St. California Village. San Bartolome. Would you like directions or our contact number?";
+          } else if (msg.includes('contact') || msg.includes('phone')) {
+            botMsg = "You can call us at +63 912 345 6789 or email marcgilbereber9@gmail.com. How else can I assist you?";
+          } else if (msg.includes('thank')) {
+            botMsg = "You're welcome! If you have more questions, just ask.";
+          } else if (msg.includes('hello') || msg.includes('hi')) {
+            botMsg = "Hello! How can I help you today?";
+          } else if (msg.includes('how are you')) {
+            botMsg = "I'm just a bot, but I'm here to help you with your inquiries!";
+          } else if (msg.includes('delivery')) {
+            botMsg = "We deliver within Metro Manila and nearby provinces. Delivery fees depend on your location and order size.";
+          } else if (msg.includes('lead time') || msg.includes('how long')) {
+            botMsg = "Lead time depends on the product and quantity. Most orders are completed within 3-7 business days.";
+          } else {
+            botMsg = "Thank you for your question! We'll get back to you as soon as possible. You can also fill out the inquiry form for a faster response.";
+          }
         }
         setTimeout(() => addChatbotMessage('Bot', botMsg), 700);
       };
