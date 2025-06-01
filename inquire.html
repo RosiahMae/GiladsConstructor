@@ -737,7 +737,23 @@
         };
       });
 
-     
+      // --- Debugging: Log EmailJS response ---
+      emailjs.send("service_va1tgzn", "template_ha9kvqf", {
+        from_name: "Test User",
+        from_email: "testuser@example.com",
+        phone: "09123456789",
+        address: "123 Test St.",
+        product: "Acrylic Plastic Built Up with LED Light",
+        size: "2ft x 3ft",
+        qty: 1,
+        price: 45000,
+        message: "This is a test inquiry."
+      }).then(function(response) {
+        console.log('EmailJS response:', response);
+      }, function(error) {
+        console.log('EmailJS error:', error);
+      });
+    });
   </script>
 </body>
 </html>
