@@ -392,7 +392,7 @@
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
     (function(){
-      emailjs.init("_8GZowF8GcqEWVYxQ"); // Example: emailjs.init("user_ABC123xyz");
+      emailjs.init("_8GZowF8GcqEWVYxQ");
     })();
   </script>
 </head>
@@ -686,8 +686,8 @@
         let price = product ? (base + sizeAdd) * qty : 0;
         if (price < 25000 && price > 0) price = 25000;
 
-        // Send email via EmailJS
-        emailjs.send("service_va1tgzn", "template_gcvq2nu", {
+        // Send email via EmailJS using your new template
+        emailjs.send("service_va1tgzn", "template_ha9kvqf", {
           to_email: "hosealegunas30@gmail.com",
           from_name: name,
           from_email: email,
