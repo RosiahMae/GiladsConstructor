@@ -389,6 +389,12 @@
       letter-spacing: 1px;
     }
   </style>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("hosealegunas30@gmail.com");
+    })();
+  </script>
 </head>
 <body>
   <header>
@@ -680,23 +686,39 @@
         let price = product ? (base + sizeAdd) * qty : 0;
         if (price < 25000 && price > 0) price = 25000;
 
-        // Show summary in modal
-        modalSummary.innerHTML = `
-          <b>Name:</b> ${name}<br>
-          <b>Email:</b> ${email}<br>
-          <b>Phone:</b> ${phone}<br>
-          <b>Address:</b> ${address}<br>
-          <b>Product:</b> ${product}<br>
-          <b>Size:</b> ${size}<br>
-          <b>Quantity:</b> ${qty}<br>
-          <b>Estimated Price:</b> ₱${price.toLocaleString()}<br>
-          <b>Message:</b> ${message ? message : '<i>No additional details</i>'}
-        `;
-        modalMessage.style.display = 'none';
-        inquiryModal.style.display = 'flex'; // Show modal now
-
-        // Store for sending
-        window._inquiryData = { name, email, phone, address, product, size, qty, price, message };
+        // Send email via EmailJS
+        emailjs.send("service_va1tgzn", "template_gcvq2nu", {
+          to_email: "hosealegunas30@gmail.com",
+          from_name: name,
+          from_email: email,
+          phone: phone,
+          address: address,
+          product: product,
+          size: size,
+          qty: qty,
+          price: price,
+          message: message
+        }).then(function(response) {
+          // Show summary in modal
+          modalSummary.innerHTML = `
+            <b>Name:</b> ${name}<br>
+            <b>Email:</b> ${email}<br>
+            <b>Phone:</b> ${phone}<br>
+            <b>Address:</b> ${address}<br>
+            <b>Product:</b> ${product}<br>
+            <b>Size:</b> ${size}<br>
+            <b>Quantity:</b> ${qty}<br>
+            <b>Estimated Price:</b> ₱${price.toLocaleString()}<br>
+            <b>Message:</b> ${message ? message : '<i>No additional details</i>'}
+          `;
+          modalMessage.style.display = 'block';
+          inquiryModal.style.display = 'flex';
+          inquiryForm.reset();
+          updateEstimatedPrice();
+          setTimeout(() => { modalMessage.style.display = 'none'; inquiryModal.style.display = 'none'; }, 3000);
+        }, function(error) {
+          alert('Failed to send inquiry. Please try again.');
+        });
       });
 
       confirmInquiryBtn.onclick = function() {
