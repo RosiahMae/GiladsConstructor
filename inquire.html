@@ -686,50 +686,73 @@
         let price = product ? (base + sizeAdd) * qty : 0;
         if (price < 25000 && price > 0) price = 25000;
 
-        // Send email via EmailJS using your new template
-        emailjs.send("service_va1tgzn", "template_ha9kvqf", {
-          from_name: name,
-          from_email: email,
-          phone: phone,
-          address: address,
-          product: product,
-          size: size,
-          qty: qty,
-          price: price,
-          message: message
-        }).then(function(response) {
-          // Show summary in modal
-          modalSummary.innerHTML = `
-            <b>Name:</b> ${name}<br>
-            <b>Email:</b> ${email}<br>
-            <b>Phone:</b> ${phone}<br>
-            <b>Address:</b> ${address}<br>
-            <b>Product:</b> ${product}<br>
-            <b>Size:</b> ${size}<br>
-            <b>Quantity:</b> ${qty}<br>
-            <b>Estimated Price:</b> ₱${price.toLocaleString()}<br>
-            <b>Message:</b> ${message ? message : '<i>No additional details</i>'}
-          `;
-          modalMessage.style.display = 'block';
-          inquiryModal.style.display = 'flex';
-          inquiryForm.reset();
-          updateEstimatedPrice();
-          setTimeout(() => { modalMessage.style.display = 'none'; inquiryModal.style.display = 'none'; }, 3000);
-        }, function(error) {
-          alert('Failed to send inquiry. Please try again.');
-        });
+        // Show summary in modal before sending
+        modalSummary.innerHTML = `
+          <b>Name:</b> ${name}<br>
+          <b>Email:</b> ${email}<br>
+          <b>Phone:</b> ${phone}<br>
+          <b>Address:</b> ${address}<br>
+          <b>Product:</b> ${product}<br>
+          <b>Size:</b> ${size}<br>
+          <b>Quantity:</b> ${qty}<br>
+          <b>Estimated Price:</b> ₱${price.toLocaleString()}<br>
+          <b>Message:</b> ${message ? message : '<i>No additional details</i>'}
+        `;
+        modalMessage.style.display = 'none';
+        inquiryModal.style.display = 'flex';
+
+        // Store data for confirm button
+        confirmInquiryBtn.onclick = function() {
+          // Disable button to prevent double send
+          confirmInquiryBtn.disabled = true;
+          emailjs.send("service_va1tgzn", "template_ha9kvqf", {
+            from_name: name,
+            from_email: email,
+            phone: phone,
+            address: address,
+            product: product,
+            size: size,
+            qty: qty,
+            price: price,
+            message: message
+          }).then(function(response) {
+            modalMessage.style.display = 'block';
+            modalMessage.style.color = 'green';
+            modalMessage.innerHTML = 'Your inquiry has been sent to <b>hosealegunas30@gmail.com</b>!';
+            inquiryForm.reset();
+            updateEstimatedPrice();
+            setTimeout(() => {
+              modalMessage.style.display = 'none';
+              inquiryModal.style.display = 'none';
+              successMessage.style.display = 'block';
+              setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
+              confirmInquiryBtn.disabled = false;
+            }, 2000);
+          }, function(error) {
+            modalMessage.style.display = 'block';
+            modalMessage.style.color = 'red';
+            modalMessage.innerHTML = 'Failed to send inquiry. Please check your internet connection or try again later.';
+            confirmInquiryBtn.disabled = false;
+          });
+        };
       });
 
-      confirmInquiryBtn.onclick = function() {
-        modalMessage.style.display = 'block';
-        setTimeout(() => {
-          inquiryModal.style.display = 'none';
-          inquiryForm.reset();
-          successMessage.style.display = 'block';
-          updateEstimatedPrice();
-          setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
-        }, 1200);
-      };
+      // --- Debugging: Log EmailJS response ---
+      emailjs.send("service_va1tgzn", "template_ha9kvqf", {
+        from_name: "Test User",
+        from_email: "testuser@example.com",
+        phone: "09123456789",
+        address: "123 Test St.",
+        product: "Acrylic Plastic Built Up with LED Light",
+        size: "2ft x 3ft",
+        qty: 1,
+        price: 45000,
+        message: "This is a test inquiry."
+      }).then(function(response) {
+        console.log('EmailJS response:', response);
+      }, function(error) {
+        console.log('EmailJS error:', error);
+      });
     });
   </script>
 </body>
